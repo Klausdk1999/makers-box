@@ -8,7 +8,7 @@ export default function HeaderSkeleton() {
 
     return (
         <HeaderContainer>
-            <h1>linkr</h1>
+            <h1>Makers.box</h1>
             <SearchContainer>
                 <SearchBar />
             </SearchContainer>
@@ -60,14 +60,14 @@ const HeaderContainer = styled.header`
     z-index: 2
     ;
     h1{
-        font-family: 'Passion One';
+        font-family: 'Silkscreen', cursive;
         font-style: normal;
-        font-weight: 700;
-        font-size: 49px;
+        font-weight: 400;
+        font-size: 45px;
         line-height: 54px;
         color: #ffffff;
         /* identical to box height */
-        letter-spacing: 0.05em;
+        
     }
     @media screen and (max-width: 836px){
         ${SearchContainer}{margin: 0 17px;}

@@ -18,84 +18,51 @@ export default function Header({ isPageLoaded }) {
 
     const linkrUser = useLocalStorage("linkrUser", "")[0];
     const localstorage = JSON.parse(localStorage.getItem("linkrUser"));
-    
-    function logout() {
-        localStorage.setItem("linkrUser", JSON.stringify(" - "));
-        navigate("/", { replace: true });
-    }
+
 
     useEffect(() => {
         setIsOpen(false);
         setIsComponentVisible(true);
     }, [cleanOpen])
 
-    const handleOpenDropdown = () => {
-        setIsOpen(!isOpen);
-    }
+   
 
     return (
         <>
+            <Page>
             {
                 !isPageLoaded
-                    ? <HeaderSkeleton />
+                    ? <>
+                    <ProjectsContainer>
+                    <h1>Loading</h1>
+                    
+                   </ProjectsContainer>
+                    <ProjectsContainer>
+    
+                   
+                    <h1>Teste 2</h1>
+                    
+                   </ProjectsContainer>
+                    <ProjectsContainer>
+                   
+                    <h1>Teste 3</h1>
+                   </ProjectsContainer>
+                   </>
+                    // <HeaderSkeleton />
                     :
-                    <HeaderContainer>
-                        <Link to={`/dashboard`}>
-                            <h1>Makers.box</h1>
-                        </Link>
-
-                        <SearchContainer>
-                            <SearchBar />
-                        </SearchContainer>
-                        <Dropdown ref={ref}>
-                            <IoIosArrowUp className={ isOpen ? "open" : ""} onClick={handleOpenDropdown}/>
-                            {
-                                isComponentVisible && (
-                                    <DropdownMenu className={isOpen ? "open" : ""}>
-                                        <DropdownOption onClick={logout}>
-                                            <h4>Logout</h4> 
-                                            <FiLogOut />
-                                        </DropdownOption>
-                                    </DropdownMenu>
-                                )
-                            }
-                        </Dropdown>
-                    </HeaderContainer>
+                    <ProjectsContainer>
+                        <h1>Teste 1</h1>
+                        <h1>Teste 2</h1>
+                        <h1>Teste 3</h1>
+                    </ProjectsContainer>
             }
+            </Page>
         </>
     )
 };
 
-const DropdownOption = styled.div`
-    display:flex;
-    align-items:center;
-    width: 100%;
-    border-radius: 5px;
-    padding:5px;
-    transition: ease all .5s;
-    h4{
-        color: #FFFFFF;
-        font-weight: 700;
-        font-size: 17px;
-        line-height: 20px;
-        letter-spacing: 0.05em;
-        margin-left: 10px;
-    }
-    &:hover{
-        background-color: #1877F2;
-        opacity: 0.8;
-
-    }
-
-`
-
-const DropdownMenu = styled.div`
-    position:absolute;
-    width:100%;
-    top: 61px;
-    left: 0;
-    display:none;
-    flex-direction:column;
+const Page = styled.div`
+    margin-top: 100px;
     svg{
         width: 20px;
         height: 20px;
@@ -226,17 +193,14 @@ const LogoutBoxOpen = styled.div`
     }
 `
 
-const HeaderContainer = styled.div`
+const ProjectsContainer = styled.div`
     display:flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     width:100%;
-    height: 72px;
+    height: 100px;
     background: #ac98ea;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 3;
     h1{
         margin: 10px;
         margin-left: 20px;
@@ -247,8 +211,5 @@ const HeaderContainer = styled.div`
         line-height: 54px;
         color: #ffffff;
         /* identical to box height */
-    }
-    @media screen and (max-width: 611px){
-        ${SearchContainer}{display:none;}
     }
 `

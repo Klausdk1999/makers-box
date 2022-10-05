@@ -10,8 +10,10 @@ import { Button, Form, Input } from "./style";
 
 export default function SignInForm() {
     const navigate = useNavigate();
+    // eslint-disable-next-line no-unused-vars
     const { url, setUser } = useContext(UserContext)
     const [isDisabled, setIsDisabled] = useState("enabled");
+    // eslint-disable-next-line no-unused-vars
     const [linkirUser, setLinkirUser] = useLocalStorage("linkrUser", "")
 
     const [userInfos, setUserInfos] = useState({
@@ -35,7 +37,7 @@ export default function SignInForm() {
         }
     }
     const AlertSucess = (result) => {
-        if (result.isConfirmed === true || result.isDismissed === true) return navigate("/timeline")
+        if (result.isConfirmed === true || result.isDismissed === true) return navigate("/dashboard")
     }
     const AlertError = (result) => {
         if (result.isConfirmed === true || result.isDismissed === true) return setIsDisabled("enabled")
