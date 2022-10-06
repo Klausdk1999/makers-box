@@ -2,16 +2,12 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import styled from "styled-components";
-import SearchBar from '../SearchBar';
 
 export default function HeaderSkeleton() {
 
     return (
         <HeaderContainer>
             <h1>Makers.box</h1>
-            <SearchContainer>
-                <SearchBar />
-            </SearchContainer>
             <ProfileContainer>
             <ion-icon name="chevron-down-outline"></ion-icon>
                 <p>

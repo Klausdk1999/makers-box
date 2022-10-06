@@ -2,15 +2,15 @@
 import Header1 from "../components/Header";
 import Projects from "../components/Projects"
 import styled from "styled-components";
-import CreateProject from "../components/CreateProject"
+import OtimizationForms from "../components/OtimizationForms"
 
 export default function Dashboard() {
   return (
     <>
       <Header1 />
       <Page>
-        <CreateProject/>
-        <Projects />
+        {/* <CreateProject/> */}
+        <OtimizationForms />
       </Page>
       
     </>
@@ -21,7 +21,7 @@ const Page = styled.div`
     padding-top: 80px;
     padding-bottom: 50px;
     background: rgb(0,0,0);
-    background: linear-gradient(32deg, rgba(0,0,0,1) 0%, rgba(93,50,227,1) 43%, rgba(216,116,233,1) 100%); 
+    background: linear-gradient(32deg, rgba(0,0,0,1) 0%, rgba(185,182,244,1) 49%, rgba(237,251,139,1) 87%); 
     transition: ease all .5s;
     display:flex;
     flex-direction: column;

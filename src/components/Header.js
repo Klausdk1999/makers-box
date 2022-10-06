@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useComponentVisible from "../hooks/useComponentVisible";
-
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import SearchBar from './SearchBar';
-import HeaderSkeleton from "./skeletonComponents/HeaderSkeleton.js";
-
 import { IoIosArrowUp } from "react-icons/io";
 import {FiLogOut} from "react-icons/fi"
 export default function Header({ isPageLoaded }) {
@@ -15,9 +11,6 @@ export default function Header({ isPageLoaded }) {
     const [isOpen, setIsOpen] = useState(false);
     const [ cleanOpen, setCleanOpen ] = useState(false);
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(true, setCleanOpen);
-
-    const linkrUser = useLocalStorage("linkrUser", "")[0];
-    const localstorage = JSON.parse(localStorage.getItem("linkrUser"));
     
     function logout() {
         localStorage.setItem("linkrUser", JSON.stringify(" - "));
@@ -34,34 +27,26 @@ export default function Header({ isPageLoaded }) {
     }
 
     return (
-        <>
-            {
-                !isPageLoaded
-                    ? <HeaderSkeleton />
-                    :
+        <> 
                     <HeaderContainer>
                         <Link to={`/dashboard`}>
                             <h1>Makers.box</h1>
                         </Link>
 
-                        <SearchContainer>
-                            <SearchBar />
-                        </SearchContainer>
                         <Dropdown ref={ref}>
                             <IoIosArrowUp className={ isOpen ? "open" : ""} onClick={handleOpenDropdown}/>
                             {
-                                isComponentVisible && (
+                               
                                     <DropdownMenu className={isOpen ? "open" : ""}>
                                         <DropdownOption onClick={logout}>
                                             <h4>Logout</h4> 
                                             <FiLogOut />
                                         </DropdownOption>
                                     </DropdownMenu>
-                                )
+                                
                             }
                         </Dropdown>
                     </HeaderContainer>
-            }
         </>
     )
 };
@@ -92,7 +77,7 @@ const DropdownOption = styled.div`
 const DropdownMenu = styled.div`
     position:absolute;
     width:100%;
-    top: 61px;
+    top: 41px;
     left: 0;
     display:none;
     flex-direction:column;
@@ -118,7 +103,7 @@ const Dropdown = styled.section`
     position: relative;
     display:flex;
     align-items:center;
-    padding-right: 17px;
+    padding-right: 0px;
     padding-left: 30px;
 
     & > svg{
@@ -137,11 +122,6 @@ const Dropdown = styled.section`
         height: 50px;
         border-radius: 25px;
     }
-`
-
-const SearchContainer = styled.div`
-    width: 563px;
-    display:flex;
 `
 
 const LogoutBox = styled.div`
@@ -232,23 +212,20 @@ const HeaderContainer = styled.div`
     align-items: center;
     width:100%;
     height: 72px;
-    background: #ac98ea;
+    background: #000000;
     position: fixed;
     left: 0;
     top: 0;
     z-index: 3;
     h1{
-        margin: 10px;
         margin-left: 20px;
         font-family: 'Silkscreen', cursive;
         font-style: normal;
         font-weight: 400;
         font-size: 45px;
-        line-height: 54px;
+        line-height: 46px;
         color: #ffffff;
+        padding-bottom: 8px;
         /* identical to box height */
-    }
-    @media screen and (max-width: 611px){
-        ${SearchContainer}{display:none;}
     }
 `

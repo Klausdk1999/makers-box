@@ -11,10 +11,10 @@ import { Button, Form, Input } from "./style";
 export default function SignInForm() {
     const navigate = useNavigate();
     // eslint-disable-next-line no-unused-vars
-    const { url, setUser } = useContext(UserContext)
+    const { url } = useContext(UserContext)
     const [isDisabled, setIsDisabled] = useState("enabled");
     // eslint-disable-next-line no-unused-vars
-    const [linkirUser, setLinkirUser] = useLocalStorage("linkrUser", "")
+    const [User, setUser] = useLocalStorage("User","")
 
     const [userInfos, setUserInfos] = useState({
         email: "",
@@ -60,15 +60,10 @@ export default function SignInForm() {
         
         const promise = axios.post(`${url}/sign-in`, userInfos);
         promise.then((res) => {
-            setLinkirUser({
-                token: {
-                    headers: {
-                        Authorization: `Bearer ` + res.data.token
-                    }
-                },
-                userId: res.data.id,
-                username: res.data.username,
-                profilePic: res.data.pictureUrl
+            setUser({
+                token:res.data.token,
+                id: res.data.id,
+                username: res.data.username
             });
 
             Swal.fire(AlertObject(

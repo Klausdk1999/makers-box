@@ -84,7 +84,9 @@ const AvailableArea = styled.div`
     }
 
      div{
-        background: #151515;
+        //background: #151515;
+        background: rgb(0,0,0);
+        background: linear-gradient(32deg, rgba(0,0,0,1) 0%, rgba(93,50,227,1) 43%, rgba(216,116,233,1) 100%); 
         box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
         min-height: 100%;
         width: 100%;
