@@ -20,7 +20,7 @@ export default function Header({ isPageLoaded }) {
     useEffect(() => {
         setIsOpen(false);
         setIsComponentVisible(true);
-    }, [cleanOpen])
+    }, [])
 
     const handleOpenDropdown = () => {
         setIsOpen(!isOpen);
@@ -32,18 +32,23 @@ export default function Header({ isPageLoaded }) {
                         <Link to={`/dashboard`}>
                             <h1>Makers.box</h1>
                         </Link>
-
+                        <Link to={`/create-project`}>
+                            <h1>New Project</h1>
+                        </Link>
+                        <Link to={`/`}>
+                            <h1>Calc</h1>
+                        </Link>
                         <Dropdown ref={ref}>
                             <IoIosArrowUp className={ isOpen ? "open" : ""} onClick={handleOpenDropdown}/>
                             {
                                
-                                    <DropdownMenu className={isOpen ? "open" : ""}>
-                                        <DropdownOption onClick={logout}>
-                                            <h4>Logout</h4> 
-                                            <FiLogOut />
-                                        </DropdownOption>
-                                    </DropdownMenu>
-                                
+                            <DropdownMenu className={isOpen ? "open" : ""}>
+                                <DropdownOption onClick={logout}>
+                                    <h4>Logout</h4> 
+                                    <FiLogOut />
+                                </DropdownOption>
+                            </DropdownMenu>
+                    
                             }
                         </Dropdown>
                     </HeaderContainer>
@@ -121,88 +126,6 @@ const Dropdown = styled.section`
         width: 50px;
         height: 50px;
         border-radius: 25px;
-    }
-`
-
-const LogoutBox = styled.div`
-
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    margin: 7px;
-    margin-right: 0px;
-    padding:5px;
-    min-width: 120px;
-    min-height: 50px;
-    background: #151515;
-    border-bottom-left-radius: 20px;
-   
-    ion-icon{
-        color: #FFFFFF;
-        margin-right: 5px;
-        font-size: 25px;
-    }
-    img{
-        width: 53px;
-        height: 53px;
-        border-radius: 26.5px;
-    }
-    @media screen and (max-width: 431px){
-        img{
-            width: 41px;
-            height: 41px;
-            border-radius: 26.5px;
-        }
-    }
-`
-
-const LogoutBoxOpen = styled.div`
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:center;
-    margin: 7px;
-    margin-right: 0px;
-    padding:5px;
-    min-width: 120px;
-    min-height: 100px;
-    background: #151515;
-    border-bottom-left-radius: 20px;
-    margin-top: 48px;
-    div{
-        display: flex;
-        flex-direction: row;
-        
-    }
-    ion-icon{
-        margin-top: 5px;
-        margin-right: 5px;
-        color: #ffffff;
-        font-size: 25px;
-    }
-    h1{
-        margin-top: 10px;
-        font-family: 'Lato';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 17px;
-        line-height: 20px;
-        letter-spacing: 0.05em;
-        color: #FFFFFF;
-    }
-    img{
-        margin-top: -1px;
-        width: 53px;
-        height: 53px;
-        border-radius: 26.5px;
-    }
-    @media screen and (max-width: 431px){
-        img{
-            width: 41px;
-            height: 41px;
-            border-radius: 26.5px;
-        }
     }
 `
 

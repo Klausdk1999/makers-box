@@ -8,6 +8,8 @@ export default function CreateProject() {
 
     let navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const [isCreated, setIsCreated] = useState(false);
+    const [id, setID] = useState(-1);
     const userInfo = useLocalStorage("User", "")[0];
     
     const [projectInfo, setProjectInfo] = useState({
@@ -23,18 +25,18 @@ export default function CreateProject() {
     },[])
 
     function Create(event) {
-        console.log("posted: "+projectInfo)
-        event.preventDefault();
-        setIsLoading(true);
+      event.preventDefault();
+      setIsLoading(true);
     
-        const promise=axios.post(`http://localhost:5000/project`,projectInfo);
+      const promise=axios.post(`http://localhost:5000/project`,projectInfo);
     
-        promise.then((resposta) => {
-          
-          console.log(resposta);
-          navigate("/dashboard");
-        });
-      }
+      promise.then((resposta) => {
+
+        setIsCreated(true);
+        setID(resposta.data.id); 
+        console.log(resposta.data)  
+      });
+    }
    
     const handleChanges = (e) => { setProjectInfo({ ...projectInfo, [e.target.name]: e.target.value }) };
 
@@ -52,7 +54,7 @@ export default function CreateProject() {
             onChange={handleChanges}
             disabled
           />
-          <input
+          <textarea rows="20" wrap="soft"
             disabled
             type="description"
             id="description"
@@ -78,13 +80,14 @@ export default function CreateProject() {
             name="youtube link"
             onChange={handleChanges}
           />
+
           <button type="submit" disabled opacity={0.7}>
             Loading
           </button>
         </Form>
       ) : (
-        <Form background={"#fafafa"} color={"#000000"} onSubmit={Create}>
-            <input
+        <Form background={"#fafafa"} color={"#000000"}>
+          <input
             required
             type="title"
             placeholder="title"
@@ -93,7 +96,7 @@ export default function CreateProject() {
             name="title"
             onChange={handleChanges}
           />
-          <input
+          <textarea rows="14" cols="10" wrap="soft" 
             required
             type="description"
             placeholder="description"
@@ -107,12 +110,10 @@ export default function CreateProject() {
             id="externalURL"
             value={projectInfo.externalURL}
             placeholder="external URL"
-            required
             name="externalURL"
             onChange={handleChanges}
           />
-           <input
-            required
+           <input 
             type="youtube link"
             placeholder="youtube link"
             id="youtube link"
@@ -120,23 +121,75 @@ export default function CreateProject() {
             name="youtubeLink"
             onChange={handleChanges}
           />
-          <button type="submit">Criar</button>
+          <button type="submit" onClick={Create}>Create</button>
+        
         </Form>
       )}
-        </>
+        
+        {!isCreated ? (
+        <Form useRef='uploadForm' id='uploadForm' 
+        action='http://localhost:5000/upload'
+        method='post' 
+        encType="multipart/form-data"
+        background={"#fafafa"} 
+        color={"#afafaf"}
+        disabled>
+        
+        <FileInput disabled type="file" name="data" />
+
+        <button type="submit" disabled opacity={0.7}>
+          Create Your Project First
+        </button>
+        </Form>
+      ) : (
+        <Form useRef='uploadForm' id='uploadForm' 
+          action={`http://localhost:5000/upload/${id}`} 
+          method='post' 
+          encType="multipart/form-data"
+          background={"#fafafa"} 
+          color={"#000000"}>
+
+          <FileInput type="file" name="data" />
+          <Link to={`http://localhost:5000/project/${id}`}>
+            <button type="submit"  value='Upload!'>Attach Files</button>
+          </Link>
+        </Form>
+      )}
+      </>
     )
 };
+
+const FileInput =styled.input`
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 23px;
+  height: 100px;
+  min-width: 100px;
+  margin-bottom: 6px;
+  border-radius: 5px;
+  border: 1px solid #d4d4d4;
+  padding-left: 11px;
+  color: ${(props) => props.color};
+  background-color: ${(props) => props.background};
+`
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   width: 90%;
-
+  height: 100%;
   input {
     font-family: "Raleway";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
     line-height: 23px;
     height: 45px;
     min-width: 100px;
@@ -146,6 +199,28 @@ const Form = styled.form`
     padding-left: 11px;
     color: ${(props) => props.color};
     background-color: ${(props) => props.background};
+  }
+  textarea{
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 23px;
+    height: 150px;
+    min-width: 100px;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    border: 1px solid #d4d4d4;
+    padding-left: 11px;
+    color: ${(props) => props.color};
+    background-color: ${(props) => props.background};
+  }
+  textarea::placeholder {
+    color: darkgray;
+    font-size: 20px;
+    font-style: italic;
   }
   input::placeholder {
     color: darkgray;
@@ -171,68 +246,3 @@ const Form = styled.form`
     }
   }
 `;
-
-
-const ProjectContainer = styled.div`
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width:90%;
-    height: 150px;
-    background: #000000;
-    margin-top:10px;
-    margin-bottom: 10px;
-    h1{
-        margin: 10px;
-        margin-left: 20px;
-        font-family: 'Silkscreen', cursive;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 40px;
-        line-height: 50px;
-        color: #ffffff;
-        /* identical to box height */
-    }
-    h2{
-        //font-family: 'Silkscreen', cursive;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 25px;
-        color: #ffffff;
-        /* identical to box height */
-    }
-`
-
-const Container = styled.div`
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width:90%;
-    height: 100px;
-    background: #000000;
-    margin-top:10px;
-    margin-bottom: 10px;
-    h1{
-        margin: 10px;
-        margin-left: 20px;
-        font-family: 'Silkscreen', cursive;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 40px;
-        line-height: 50px;
-        color: #ffffff;
-        /* identical to box height */
-    }
-    h2{
-        //font-family: 'Silkscreen', cursive;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 25px;
-        color: #ffffff;
-        /* identical to box height */
-    }
-`

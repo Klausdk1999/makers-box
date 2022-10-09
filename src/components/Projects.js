@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function Header({ isPageLoaded }) {
+export default function Header() {
 
     let navigate = useNavigate();
     const [projects, setProjects] = useState([]);
@@ -34,12 +34,14 @@ export default function Header({ isPageLoaded }) {
                         <h1>My Projects</h1>
                     </Container>
                     { projects.map((e) => 
-                    <ProjectContainer>
-                        <h1>{e.title}</h1>
-                        <h2>{e.description}</h2>
-                        <h2>{e.date}</h2>
-                        <h2>{e.youtubeLink}</h2>
-                    </ProjectContainer>
+                    <Link to={`/project/${e.id}`}>
+                        <ProjectContainer key={e.id}>
+                            <h1>{e.title}</h1>
+                            <h2>{e.description}</h2>
+                            <h2>{e.date}</h2>
+                        </ProjectContainer>
+                    </Link>
+                    
                     )}
                     </>
                     :
@@ -61,14 +63,14 @@ const ProjectContainer = styled.div`
     background: #000000;
     margin-top:10px;
     margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 10px;
     h1{
-        margin: 10px;
-        margin-left: 20px;
         font-family: 'Silkscreen', cursive;
         font-style: normal;
         font-weight: 400;
         font-size: 40px;
-        line-height: 50px;
+        line-height: 45px;
         color: #ffffff;
         /* identical to box height */
     }
@@ -77,19 +79,20 @@ const ProjectContainer = styled.div`
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
-        line-height: 25px;
+        line-height: 23px;
         color: #ffffff;
         /* identical to box height */
     }
 `
 
 const Container = styled.div`
+    border-radius: 10px;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width:90%;
-    height: 100px;
+    width:40%;
+    height: 80px;
     background: #000000;
     margin-top:10px;
     margin-bottom: 10px;

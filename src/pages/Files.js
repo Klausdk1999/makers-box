@@ -1,25 +1,26 @@
-//import Header from "../../components/Header/Header";
 import Header1 from "../components/Header";
-import Projects from "../components/Projects"
 import styled from "styled-components";
+import FilesForm from "../components/filesForm"
 
-export default function Dashboard() {
+export default function CreateProjectPage() {
+
   return (
     <>
       <Header1 />
       <Page>
-        <Projects />
+        <FilesForm/>
       </Page>
-      
     </>
   );
 }
 
 const Page = styled.div`
+    width: 100%;
+    height: calc(100vh);
     padding-top: 80px;
     padding-bottom: 50px;
-    background: rgb(0,0,0);
-    background: linear-gradient(32deg, rgba(0,0,0,1) 0%, rgba(93,50,227,1) 43%, rgba(216,116,233,1) 100%); 
+    background: rgb(93,50,227);
+    background: linear-gradient(173deg, rgba(93,50,227,1) 50%, rgba(237,251,139,1) 77%); 
     transition: ease all .5s;
     display:flex;
     flex-direction: column;
@@ -27,7 +28,7 @@ const Page = styled.div`
     &.open{
         display:flex;
         padding: 10px;
-        height: auto;
+        height: 100%;
         background-color: #171717;
         border-radius: 0px 0px 0px 20px;
     }
