@@ -20,6 +20,7 @@ export default function Project() {
       let promise = axios.get(`http://localhost:5000/project/${id}`);
       promise.then((res) => {
         setProject(res.data)
+        console.log(res.data)
         setIsLoading(false)
     }).catch((error) => console.log("get Error", error));
   }
@@ -41,8 +42,9 @@ export default function Project() {
             <h1>{project.title}</h1>
             <h2>{project.description}</h2>
             <h2>{project.date}</h2>
+            <h2>{project.externalURL}</h2>
             <h2>{project.youtubeLink}</h2>
-            <img src={`http://localhost:5000/project/file/${id}`}></img>
+            <img src={`http://localhost:5000/project/file/${id}`} alt="project img"></img>
           </ProjectContainer>
         }
           
@@ -63,6 +65,8 @@ const ProjectContainer = styled.div`
     margin-bottom: 10px;
     border-radius: 10px;
     padding: 10px;
+    
+
     img{
       width: 200px;
       height: 200px;
@@ -91,6 +95,7 @@ const ProjectContainer = styled.div`
 const Page = styled.div`
     padding-top: 80px;
     padding-bottom: 50px;
+    height: 100vh;
     background: rgb(0,0,0);
     background: linear-gradient(32deg, rgba(0,0,0,1) 0%, rgba(93,50,227,1) 43%, rgba(216,116,233,1) 100%); 
     transition: ease all .5s;
@@ -100,7 +105,7 @@ const Page = styled.div`
     &.open{
         display:flex;
         padding: 10px;
-        height: auto;
+        
         background-color: #171717;
         border-radius: 0px 0px 0px 20px;
     }

@@ -24,6 +24,7 @@ const Page = styled.div`
     display:flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
     &.open{
         display:flex;
         padding: 10px;

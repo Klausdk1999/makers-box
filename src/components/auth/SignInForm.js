@@ -65,7 +65,6 @@ export default function SignInForm() {
                 id: res.data.id,
                 username: res.data.username
             });
-
             Swal.fire(AlertObject(
                 'success',
                 'Login realizado com sucesso!',

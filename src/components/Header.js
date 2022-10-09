@@ -33,10 +33,10 @@ export default function Header({ isPageLoaded }) {
                             <h1>Makers.box</h1>
                         </Link>
                         <Link to={`/create-project`}>
-                            <h1>New Project</h1>
+                            <Box1><h2>New Project</h2></Box1>
                         </Link>
                         <Link to={`/`}>
-                            <h1>Calc</h1>
+                            <Box2><h2>Math</h2></Box2>
                         </Link>
                         <Dropdown ref={ref}>
                             <IoIosArrowUp className={ isOpen ? "open" : ""} onClick={handleOpenDropdown}/>
@@ -128,6 +128,42 @@ const Dropdown = styled.section`
         border-radius: 25px;
     }
 `
+const Box2 = styled.div`
+background: rgb(93,50,227);
+background: linear-gradient(173deg, rgba(93,50,227,1) 50%, rgba(237,251,139,1) 77%); 
+width: 100%;
+height: 50px;
+border-radius: 10px;
+h2{
+    margin:5px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 46px;
+    color: #000000;
+    padding-bottom: 8px;
+    /* identical to box height */
+}
+`
+const Box1 = styled.div`
+    background: rgb(93,50,227);
+    background: linear-gradient(173deg, rgba(93,50,227,1) 50%, rgba(237,251,139,1) 77%); 
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    h2{
+        margin:5px;
+        font-family: Lato;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 35px;
+        line-height: 46px;
+        color: #000000;
+        padding-bottom: 8px;
+        /* identical to box height */
+    }
+`
 
 const HeaderContainer = styled.div`
     display:flex;
@@ -151,4 +187,5 @@ const HeaderContainer = styled.div`
         padding-bottom: 8px;
         /* identical to box height */
     }
+    
 `

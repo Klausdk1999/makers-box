@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,19 +8,19 @@ export default function Header() {
 
     let navigate = useNavigate();
     const [projects, setProjects] = useState([]);
-    const linkrUser = useLocalStorage("linkrUser", "")[0];
-    const localstorage = JSON.parse(localStorage.getItem("linkrUser"));
-
+    const [User, setUser] = useLocalStorage("User","");
+    
     useEffect(() => {
         getProjects();
     },[])
 
     function getProjects(){
-        let promise = axios.get("http://localhost:5000/project");
+        let promise = axios.get(`http://localhost:5000/projects/${User.id}`);
         promise.then((res) => {
+        
         setProjects([]);
         setProjects([...res.data]);
-        console.log(res.data);
+        
       }).catch((error) => console.log("get Error", error));
     }
    
@@ -34,32 +34,37 @@ export default function Header() {
                         <h1>My Projects</h1>
                     </Container>
                     { projects.map((e) => 
-                    <Link to={`/project/${e.id}`}>
-                        <ProjectContainer key={e.id}>
-                            <h1>{e.title}</h1>
-                            <h2>{e.description}</h2>
-                            <h2>{e.date}</h2>
-                        </ProjectContainer>
-                    </Link>
-                    
+                   
+                    <ProjectContainer key={e.id}  onClick={() =>navigate(`/project/${e.id}`)}>
+                        <h1>{e.title}</h1>
+                        <h2>{e.date}</h2>
+                    </ProjectContainer>
                     )}
                     </>
                     :
+                    <>
                     <ProjectContainer>
-                        <h1>Loading . . . </h1>
+                        <h1>Loading . . . </h1>  
                     </ProjectContainer> 
+                    <ProjectContainer onClick={() =>navigate(`/create-project`)}>
+                        <h1>First Time?</h1>
+                        <h1>Create a project</h1>
+                    </ProjectContainer>
+                    </>
             }   
-        </>
+            </>
     )
 };
 
 const ProjectContainer = styled.div`
+    cursor: pointer;
     display:flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
-    height: 150px;
+    width: 80%;
+    height: 100px;
     background: #000000;
     margin-top:10px;
     margin-bottom: 10px;
