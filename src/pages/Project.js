@@ -64,7 +64,7 @@ const ProjectContainer = styled.div`
     margin-top:10px;
     margin-bottom: 10px;
     border-radius: 10px;
-    padding: 10px;
+    padding: 30px;
     
 
     img{

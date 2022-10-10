@@ -15,7 +15,7 @@ export default function Header() {
     },[])
 
     function getProjects(){
-        let promise = axios.get(`http://localhost:5000/projects/${User.id}`);
+        let promise = axios.get(`https://api-artificer.herokuapp.com/projects/${User.id}`);
         promise.then((res) => {
         
         setProjects([]);

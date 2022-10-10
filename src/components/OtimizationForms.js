@@ -16,7 +16,7 @@ export default function Header({ isPageLoaded }) {
     },[])
 
     function getProjects(){
-        let promise = axios.get("http://localhost:5000/project");
+        let promise = axios.get("https://api-artificer.herokuapp.com/project");
         promise.then((res) => {
         setProjects([]);
         setProjects([...res.data]);

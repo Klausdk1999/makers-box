@@ -56,7 +56,7 @@ export default function SignUpForm() {
         setIsDisabled("disabled");
         handleIsEmpty();
 
-        const promise = axios.post(`${url}/sign-up`, userInfos);
+        const promise = axios.post(`https://api-artificer.herokuapp.com/sign-up`, userInfos);
         promise.then((res) => {
             Swal.fire(AlertObject(
                 'success',
