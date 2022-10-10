@@ -3,7 +3,6 @@ import useLocalStorage  from "../hooks/useLocalStorage";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import FileUpload from "./CreateProjectFormtestes";
 
 export default function CreateProject() {
 
@@ -32,7 +31,7 @@ export default function CreateProject() {
       event.preventDefault();
       setIsLoading(true);
     
-      const promise=axios.post(`http://localhost:5000/project`,projectInfo);
+      const promise=axios.post(`https://api-artificer.herokuapp.com/project`,projectInfo);
     
       promise.then((resposta) => {
 
@@ -56,7 +55,7 @@ export default function CreateProject() {
       formData.append('files',image_file);
  
       const promise=axios.post(
-        `http://localhost:5000/upload/${id}`, formData,
+        `https://api-artificer.herokuapp.com/upload/${id}`, formData,
         {headers: {
                 "Authorization": "YOUR_API_AUTHORIZATION_KEY_SHOULD_GOES_HERE_IF_HAVE",
                 "Content-type": "multipart/form-data",
