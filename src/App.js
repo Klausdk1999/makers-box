@@ -18,7 +18,6 @@ const LazyWrapper = (Component) => (props) =>
 
 const Dashboard = LazyWrapper(lazy(() => import("./pages/Dashboard")));
 const CreateProjectPage=LazyWrapper(lazy(() => import("./pages/CreateProject")));
-const File =   LazyWrapper(lazy(() => import("./pages/Files")));
 const Project= LazyWrapper(lazy(() => import("./pages/Project")));
 
 export default function App() {
@@ -46,7 +45,6 @@ export default function App() {
                             <Route path="/" element={<SignIn />} />
                             <Route path="/sign-up" element={<SignUp />} />
                             <Route path="/dashboard" element={<Dashboard />}/>
-                            <Route path="/insert-files" element={<File />} />
                             <Route path="/project/:id" element={<Project />} />
                             <Route path="/create-project" element={<CreateProjectPage/>}/>
                             <Route path="*" element={<div>Not found!</div>} />
