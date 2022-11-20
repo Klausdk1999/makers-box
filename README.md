@@ -1,11 +1,9 @@
 <div align="center">
-  <a href="https://github.com/LeonMesquita/projeto-17-linkr-front">
-    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" alt="JavaScriptLogo" width="100">
-  </a>
 
-  <h3 align="center">Linkr Front-End</h3>
+  <h3 align="center">Makers.box</h3>
   <div align="center">
-    17th Project of Driven Education
+    Makers Box is a plataform that allows the user to store projects, it allows update of files, and information about projects.
+    You can access it on https://makers-box.vercel.app/
     <br />
   </div>
 </div>
