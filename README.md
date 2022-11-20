@@ -21,6 +21,3 @@
   <!-- Badges source: https://dev.to/envoy_/150-badges-for-github-pnk -->
 </div>
 
-<!-- Table of Contents -->
-
-# Table of Contents
